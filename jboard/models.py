@@ -39,7 +39,7 @@ class ExRateUSDKRW(models.Model):
     difference = models.FloatField()
 
     def __str__(self):
-        return str(self)
+        return f"{self.date}, {self.lastvalue}, {self.difference}"
 
 class ExRateJPYKRW(models.Model):
     date = models.DateField()
