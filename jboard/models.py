@@ -11,7 +11,7 @@ class Kospi(models.Model):
     highvalue = models.FloatField()
     lowvalue = models.FloatField()
     volume = models.FloatField()
-    tranactionvalue = models.BigIntegerField()
+    tranaction = models.BigIntegerField()
     marketcap = models.BigIntegerField()
 
     def __str__(self):
@@ -26,7 +26,7 @@ class Kosdaq(models.Model):
     highvalue = models.FloatField()
     lowvalue = models.FloatField()
     volume = models.FloatField()
-    tranactionvalue = models.BigIntegerField()
+    tranaction = models.BigIntegerField()
     marketcap = models.BigIntegerField()
 
     def __str__(self):
@@ -69,7 +69,10 @@ class GoldKorea(models.Model):
     date = models.DateField()
     lastvalue = models.FloatField()
     difference = models.FloatField()
-
+    startvalue = models.FloatField()
+    highvalue = models.FloatField()
+    lowvalue = models.FloatField()
+    
     def __str__(self):
         return str(self)
 
