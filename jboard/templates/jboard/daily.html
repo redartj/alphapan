@@ -4,6 +4,15 @@
 <h2>Daily</h2>
 
 <div>
-    {{ chart|safe }}
+    {{ dfUSDKRW|safe }}
+</div>
+
+<div>
+    <form method="GET" action="{% url 'jboard:daily' %}">
+        {{ ExRform.as_p }}
+        <button> Submit </button>
+    </form>
+    {{ ExRateChart|safe }}
+
 </div>
 {% endblock %}

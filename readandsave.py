@@ -3,24 +3,24 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "DjangoApp.settings")
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
 
-from jboard.models import Kospi,Kosdaq,ExRateUSDKRW,ExRateJPYKRW,CrudOil,GoldGlobal,GoldKorea
+from jboard.models import Kospi,Kosdaq,ExRateUSDKRW,ExRateJPYKRW,ExRateEURKRW,ExRateCNYKRW,CrudOil,GoldGlobal,GoldKorea
 import numpy as np
 import pandas as pd
 
 def csv_input():  
-    with open("./data/gold_140324_230104.csv", "r", encoding='utf-8-sig') as f:
+    with open("./data/exrate_eurkrw_030102_230112.csv", "r", encoding='utf-8-sig') as f:
         reader = csv.reader(f)
         i = 0
         for row in reader:
             i += 1
             print(row[0], row[1], row[2])
-            GoldKorea.objects.get_or_create(
+            ExRateEURKRW.objects.get_or_create(
                 date=row[0],
                 lastvalue=row[1],
-                difference=row[2],
-                startvalue=row[3],
-                highvalue=row[4],
-                lowvalue=row[5]
+                difference=row[2]
+                # startvalue=row[3],
+                # highvalue=row[4],
+                # lowvalue=row[5]
             )
             print(i,'th done')
 

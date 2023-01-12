@@ -15,7 +15,8 @@ class Kospi(models.Model):
     marketcap = models.BigIntegerField()
 
     def __str__(self):
-        return str(self)
+        return f"{self.date}, {self.lastvalue}, {self.difference}, {self.startvalue}, {self.highvalue}, {self.lowvalue}, {self.volume}, {self.tranaction}, {self.marketcap}"
+
 
 
 class Kosdaq(models.Model):
@@ -30,7 +31,8 @@ class Kosdaq(models.Model):
     marketcap = models.BigIntegerField()
 
     def __str__(self):
-        return str(self)
+        return f"{self.date}, {self.lastvalue}, {self.difference}, {self.startvalue}, {self.highvalue}, {self.lowvalue}, {self.volume}, {self.tranaction}, {self.marketcap}"
+
 
 
 class ExRateUSDKRW(models.Model):
@@ -47,7 +49,23 @@ class ExRateJPYKRW(models.Model):
     difference = models.FloatField()
 
     def __str__(self):
-        return str(self)
+        return f"{self.date}, {self.lastvalue}, {self.difference}"
+
+class ExRateEURKRW(models.Model):
+    date = models.DateField()
+    lastvalue = models.FloatField()
+    difference = models.FloatField()
+
+    def __str__(self):
+        return f"{self.date}, {self.lastvalue}, {self.difference}"
+
+class ExRateCNYKRW(models.Model):
+    date = models.DateField()
+    lastvalue = models.FloatField()
+    difference = models.FloatField()
+
+    def __str__(self):
+        return f"{self.date}, {self.lastvalue}, {self.difference}"
 
 class CrudOil(models.Model):
     date = models.DateField()
@@ -55,7 +73,8 @@ class CrudOil(models.Model):
     difference = models.FloatField()
 
     def __str__(self):
-        return str(self)
+        return f"{self.date}, {self.lastvalue}, {self.difference}"
+
 
 class GoldGlobal(models.Model):
     date = models.DateField()
@@ -63,7 +82,8 @@ class GoldGlobal(models.Model):
     difference = models.FloatField()
 
     def __str__(self):
-        return str(self)
+        return f"{self.date}, {self.lastvalue}, {self.difference}"
+
 
 class GoldKorea(models.Model):
     date = models.DateField()
@@ -74,7 +94,8 @@ class GoldKorea(models.Model):
     lowvalue = models.FloatField()
     
     def __str__(self):
-        return str(self)
+        return f"{self.date}, {self.lastvalue}, {self.difference}, {self.startvalue}, {self.highvalue}, {self.lowvalue}"
+
 
     # Macro
 
