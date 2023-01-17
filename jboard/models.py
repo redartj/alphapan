@@ -7,6 +7,7 @@ class Kospi(models.Model):
     date = models.DateField()
     lastvalue = models.FloatField()
     difference = models.FloatField()
+    diffrate = models.FloatField()
     startvalue = models.FloatField()
     highvalue = models.FloatField()
     lowvalue = models.FloatField()
@@ -15,7 +16,7 @@ class Kospi(models.Model):
     marketcap = models.BigIntegerField()
 
     def __str__(self):
-        return f"{self.date}, {self.lastvalue}, {self.difference}, {self.startvalue}, {self.highvalue}, {self.lowvalue}, {self.volume}, {self.tranaction}, {self.marketcap}"
+        return f"날짜:{self.date}, 종가:{self.lastvalue}, 변화:{self.difference}, 변화율:{self.diffrate}, 시가:{self.startvalue}, 고가:{self.highvalue}, 저가:{self.lowvalue}, 거래량:{self.volume}, 거래대금:{self.tranaction}, 시가총액:{self.marketcap}"
 
 
 
@@ -23,6 +24,7 @@ class Kosdaq(models.Model):
     date = models.DateField()
     lastvalue = models.FloatField()
     difference = models.FloatField()
+    diffrate = models.FloatField()
     startvalue = models.FloatField()
     highvalue = models.FloatField()
     lowvalue = models.FloatField()
@@ -31,7 +33,7 @@ class Kosdaq(models.Model):
     marketcap = models.BigIntegerField()
 
     def __str__(self):
-        return f"{self.date}, {self.lastvalue}, {self.difference}, {self.startvalue}, {self.highvalue}, {self.lowvalue}, {self.volume}, {self.tranaction}, {self.marketcap}"
+        return f"날짜:{self.date}, 종가:{self.lastvalue}, 변화:{self.difference}, 변화율:{self.diffrate}, 시가:{self.startvalue}, 고가:{self.highvalue}, 저가:{self.lowvalue}, 거래량:{self.volume}, 거래대금:{self.tranaction}, 시가총액:{self.marketcap}"
 
 
 

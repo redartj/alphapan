@@ -1,7 +1,73 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>알파판입니다</h2>
+<br>
+<h3>국내시장</h3>
+<div>
+    <table class="table table-sm" style="text-align: center">
+        <thead>
+          <tr>
+            <th scope="col">종류</th>
+            <th scope="col">종가</th>
+            <th scope="col">대비</th>
+            <th scope="col">변화율</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">코스피</th>
+                <td>{{ kospi.lastvalue|safe|floatformat:"2g"|rjust:"2" }}</td>
+                <td>{{ kospi.difference|safe|floatformat:3 }}</td>
+                <td>{{ kospi.diffrate|safe }}</td>
+            </td>
+            <tr>
+                <th scope="row">코스닥</th>
+                <td>{{ kosdaq.lastvalue|safe|floatformat:"2g"|rjust:"2" }}</td>
+                <td>{{ kosdaq.difference|safe|floatformat:3 }}</td>
+                <td>{{ kosdaq.diffrate|safe }}</td>
+            </tr>
+            <tr>
+                <th scope="row">원/달러</th>
+                <td>{{ usdkrw.lastvalue|safe|floatformat:"2g" }}</td>
+                <td>{{ usdkrw.difference|safe|floatformat:3 }}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">원/엔</th>
+                <td>{{ jpykrw.lastvalue|safe|floatformat:"2g" }}</td>
+                <td>{{ jpykrw.difference|safe|floatformat:3 }}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">국고 3년</th>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">국고 10년</th>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">금현물</th>
+                <td>{{ gldkor.lastvalue|safe }}</td>
+                <td>{{ gldkor.difference|safe }}</td>
+                <td></td>
+            </tr>
+        </tbody>
+      </table>
 
+    {{ kospi|safe }}<br>
+    {{ kosdaq|safe }}<br>
+    {{ usdkrw|safe }}<br>
+    {{ jpykrw|safe }}<br>
+    {{ eurkrw|safe }}<br>
+    {{ cnykrw|safe }}<br>
+    {{ crud|safe }}<br>
+    {{ gldglobal|safe }}<br>
+    {{ gldkor|safe }}<br>
+</div>
 
 {% endblock %}

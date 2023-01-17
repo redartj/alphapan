@@ -2,17 +2,38 @@
 
 {% block content %}
 <h2>Daily</h2>
+<div><br><br></div>
 
+<h2>국내시장</h2>
+<div><br></div>
 <div>
-    {{ dfUSDKRW|safe }}
-</div>
-
-<div>
+    <h3>환율</h3>
     <form method="GET" action="{% url 'jboard:daily' %}">
-        {{ ExRform.as_p }}
+        {{ ExRForm }}
         <button> Submit </button>
     </form>
     {{ ExRateChart|safe }}
 
+</div>
+<div><br></div>
+<div>
+    <h3>주식시장</h3>
+    <form method="GET" action="{% url 'jboard:daily' %}">
+        {{ MktForm }}
+        <button> Submit </button>
+    </form>
+    {{ MktChart|safe }}
+</div>
+<div><br><br></div>
+<div>
+    <h2>해외시장</h2>
+    <div>
+        <h3>미국시장</h3>    
+        {% comment %} {{ OilChart|safe }} {% endcomment %}
+    </div>
+    <div>
+        <h3>원자재</h3>    
+        {{ OilChart|safe }}
+    </div>
 </div>
 {% endblock %}
