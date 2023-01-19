@@ -1,8 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView,CreateView
 from django.urls import reverse, reverse_lazy
-from jboard.models import Kospi,Kosdaq,ExRateUSDKRW,ExRateJPYKRW,ExRateEURKRW,ExRateCNYKRW,CrudOil,GoldGlobal,GoldKorea
+from jboard.models import Kospi,Kosdaq,ExRateUSDKRW,ExRateJPYKRW,ExRateEURKRW,ExRateCNYKRW,CrudOil,GoldGlobal,GoldKorea,\
+                        PFKstocks,PFBonds
 from jboard.forms import ExRDateForm,MktDateForm
 import pandas as pd
 import numpy as np
@@ -190,7 +191,7 @@ class DailyView(TemplateView):
 
         qsKospi = Kospi.objects.filter(date__gte="2018-01-01").all().values()    
         qsKosdaq = Kosdaq.objects.filter(date__gte="2018-01-01").all().values()
-        
+
         if whatchart:
             match whatchart:
                 case 'KOSPI':
@@ -353,11 +354,31 @@ class datainput(TemplateView):
     template_name = 'jboard/datainput.html'
 
 
-class PortfolioView(TemplateView):
-    template_name = 'jboard/portfolio.html'
+def portfolio(request):
 
+    samsung = 61000
+    kgb_01125_3909 = 7180
 
+    qsPFKstocks = PFKstocks.objects.all()
+    qsPFKbons = PFBonds.objects.all()
 
+    content = {'bond': qsPFKstocks}
+    content = {'kstock':qsPFKbons}
+
+    return render(request,'jboard/portfolio.html',content)
+
+class create_pf_stocks(CreateView):
+    model = PFKstocks
+    fields = '__all__'
+    successful_url = reverse_lazy('jboard:portfolio')
+
+class create_pf_bonds(CreateView):
+    model = PFBonds
+    fields = '__all__'
+    successful_url = reverse_lazy('jboard:portfolio')
+
+# class PortfolioView(TemplateView):
+#     template_name = 'jboard/portfolio.html'
 
 
 
