@@ -3,6 +3,74 @@
 {% block content %}
 <h2>포트폴리오뷰</h2>
 <a class="btn btn-primary" href="./create_pf_stocks" role="button">주식 추가</a>
-<a class="btn btn-primary" href="./create_pf_bonds" role="button">채권 추가n</a>
-sdf
+<a class="btn btn-primary" href="./create_pf_bonds" role="button">채권 추가</a>
+
+<br><br>
+
+<p>
+    <div>
+        <h3>국내주식</h3>
+        <ul>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">PK</th>
+                    <th scope="col">코드</th>
+                    <th scope="col">수량</th>
+                    <th scope="col">매입가</th>
+                    <th scope="col">거래일</th>
+                    <th scope="col">거래액</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for k in kstock %}
+                    <tr>
+                        <th scope="row">{{k.id}}</th>
+                        <td>{{k.code}}</td>
+                        <td>{{k.buynum}}</td>
+                        <td>{{k.buyprice|floatformat:"-3g"}}</td>
+                        <td>{{k.date}}</td>
+                        <td>{{k.trans_amt|floatformat:"-3g"}}</td>
+                        <td><a type="button" class="btn btn-outline-warning btn-sm" href="./PFKstockUpdate/{{exchange.id}}">수정</a></td>
+                        <td><a type="button" class="btn btn-outline-danger btn-sm" href="./PFKstockDelete/{{exchange.id}}">삭제</a></td>
+                    </tr>
+                    {%endfor%}
+            </tbody>
+            </table>
+        </ul>
+    </div>
+    <br><br>
+    <div>
+        <h3>채권</h3>
+        <ul>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                    <th scope="col">PK</th>
+                    <th scope="col">코드</th>
+                    <th scope="col">수량</th>
+                    <th scope="col">매입가</th>
+                    <th scope="col">거래일</th>
+                    <th scope="col">거래액</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for k in kbond %}
+                    <tr>
+                        <th scope="row">{{k.id}}</th>
+                        <td>{{k.code}}</td>
+                        <td>{{k.buynum|floatformat:"-3g"}}</td>
+                        <td>{{k.buyprice|floatformat:"-3g"}}</td>
+                        <td>{{k.date}}</td>
+                        <td>{{k.trans_amt|floatformat:"-3g"}}</td>
+                        <td><a type="button" class="btn btn-outline-warning btn-sm" href="./PFBondUpdate/{{exchange.id}}">수정</a></td>
+                        <td><a type="button" class="btn btn-outline-danger btn-sm" href="./PFBOndDelete/{{exchange.id}}">삭제</a></td>
+                    </tr>
+                    {%endfor%}
+            </tbody>
+            </table>
+        </ul>
+    </div>
+<p>
+
 {% endblock %}

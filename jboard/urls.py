@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import HomeView,DailyView,MacroView
+from .views import HomeView,DailyView,MacroView,PFBondsCreateView
 from . import views
 
 app_name='jboard'
@@ -11,7 +11,7 @@ urlpatterns=[
     path('macro/',views.MacroView.as_view(),name='macro'),
     path('portfolio/',views.portfolio,name='portfolio'),
 
-    path('portfolio/create_pf_stocks/',views.create_pf_stocks.as_view(),name='create_pf_stocks'),
-    path('portfolio/create_pf_bonds/',views.create_pf_bonds.as_view(),name='create_pf_bonds'),
+    path('portfolio/create_pf_stocks/',views.PFKStocksCreateView.as_view(),name='create_pf_stocks'),
+    path('portfolio/create_pf_bonds/',views.PFBondsCreateView.as_view(),name='create_pf_bonds'),
         
 ]

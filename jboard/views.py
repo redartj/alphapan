@@ -1,9 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.generic import TemplateView,CreateView
+from django.views.generic import TemplateView,CreateView,UpdateView
 from django.urls import reverse, reverse_lazy
 from jboard.models import Kospi,Kosdaq,ExRateUSDKRW,ExRateJPYKRW,ExRateEURKRW,ExRateCNYKRW,CrudOil,GoldGlobal,GoldKorea,\
-                        PFKstocks,PFBonds
+                        PFKStocks,PFBonds
 from jboard.forms import ExRDateForm,MktDateForm
 import pandas as pd
 import numpy as np
@@ -11,6 +11,8 @@ from plotly.offline import plot
 import plotly.express as px
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
+from collections import defaultdict
+
 
 
 # test
@@ -58,6 +60,7 @@ class DailyView(TemplateView):
         qsCNYKRW = ExRateCNYKRW.objects.filter(date__gte="2018-01-01").all().values()
         
         if whatchart:
+
             match whatchart:
                 case 'USDKRW':
                     if start or end:
@@ -359,27 +362,54 @@ def portfolio(request):
     samsung = 61000
     kgb_01125_3909 = 7180
 
-    qsPFKstocks = PFKstocks.objects.all()
-    qsPFKbons = PFBonds.objects.all()
+    qsPFKStocks = PFKStocks.objects.all()
+    context=defaultdict(list)
+    for stock in qsPFKStocks:
+        stock_data = {
+            'code':stock.code,
+            'buyprice':stock.buyprice,
+            'buynum' :stock.buynum,
+            'date':stock.date,
+            'trans_amt':stock.buyprice*stock.buynum,
+        }
+        print(stock_data)
+        context['kstock'].append(stock_data)
+        print(context)
 
-    content = {'bond': qsPFKstocks}
-    content = {'kstock':qsPFKbons}
+    qsPFKBons = PFBonds.objects.all()
+    for bond in qsPFKBons:
+        bond_data = {
+            'code':bond.code,
+            'buyprice':bond.buyprice,
+            'buynum':bond.buynum,
+            'date':bond.date,
+            'trans_amt':stock.buyprice*stock.buynum,
+        }
+        context['kbond'].append(bond_data)
 
-    return render(request,'jboard/portfolio.html',content)
+    print(context)
+    # context = {'kstock':qsPFKbons,'bond': qsPFKStocks}
+    return render(request,'jboard/portfolio.html',context)
 
-class create_pf_stocks(CreateView):
-    model = PFKstocks
+class PFKStocksCreateView(CreateView):
+    model = PFKStocks
     fields = '__all__'
-    successful_url = reverse_lazy('jboard:portfolio')
+    success_url = reverse_lazy('jboard:portfolio')
 
-class create_pf_bonds(CreateView):
+class PFBondsCreateView(CreateView):
     model = PFBonds
     fields = '__all__'
-    successful_url = reverse_lazy('jboard:portfolio')
+    success_url = reverse_lazy('jboard:portfolio')
 
-# class PortfolioView(TemplateView):
-#     template_name = 'jboard/portfolio.html'
+class PFKStocksUpdateView(UpdateView):
+    model = PFKStocks
+    fields = '__all__'
+    success_url = reverse_lazy('jboard:portfolio')
 
+class PFBondsUpdateView(UpdateView):
+    model = PFBonds
+    fields = '__all__'
+    success_url = reverse_lazy('jboard:portfolio')
 
 
 
